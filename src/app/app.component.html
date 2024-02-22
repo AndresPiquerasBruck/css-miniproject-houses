@@ -10,13 +10,20 @@
 <body>
   <div #imageTrack id="image-track" (keydown)="trackHandleKeys($event)" tabindex="0">
     <div *ngFor="let image of imagesData; let i = index;">
-      <img #image class="image" tabindex="-1"
-        [src]="image.src" 
-        (click)="clickImage(i)" 
+      <div class="image-container">
+        <img #image class="image" tabindex="-1"
+          [src]="image.src" 
+          (click)="clickImage(i)" 
         draggable="false" unselectable="on">
-
-      <div *ngIf="image.expanded" class="image-info">
-        <h1 style="color: pink;">Chat</h1>
+        <div class="img-text">
+          <h1>Apartamento #{{i}}</h1>
+          <p>C/Emperatriz Eugenia n{{i+50}}</p>
+        </div>
+        <div *ngIf="image.expanded" class="overlay-text" (click)="clickImage(i)">
+          <p>C/Emperatriz Eugenia n{{i+50}}</p>
+          <p>C/Emperatriz Eugenia n{{i+50}}</p>
+          <p>C/Emperatriz Eugenia n{{i+50}}</p>
+        </div>
       </div>
     </div>
   </div>

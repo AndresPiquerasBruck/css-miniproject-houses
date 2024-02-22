@@ -1,10 +1,10 @@
-import { animate } from '@angular/animations';
 import { Component, Renderer2, OnInit, OnDestroy, ElementRef, ViewChild, ViewChildren, QueryList } from '@angular/core';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
   initialPosX: number = 0;
@@ -109,7 +109,12 @@ export class AppComponent implements OnInit, OnDestroy {
           image.expanded = false;
         } else if (this.imagesList) {
           image.expanded = true;
+          this.imagesData[index].expanded = true;
         }
+      });
+
+      this.imagesData.forEach((img, i) => {
+        if (i !== index) img.expanded = false;
       });
 
       this.imagesList.forEach((image, i) => {
@@ -133,7 +138,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   trackHandleKeys(event: KeyboardEvent) {
-    if (event.key === 'ArrowLeft' || event.key === 'Left') {
+    if (event.key === 'Enter' || event.key === 'Space') {
+      this.clickImage(this.selectedIndex);
+    } else if (event.key === 'ArrowLeft' || event.key === 'Left') {
       console.log("left");
       event.preventDefault();
       this.animateTrack(11.1111, 400);
